@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:html/parser.dart' show parse;
+import 'package:manga/entity/home_entity.dart';
 import 'package:manga/request/dio_manage.dart';
-import 'package:manga/utils/logUtil.dart';
 
 class HomeServices {
   static Future getData() async {
@@ -22,10 +22,10 @@ class HomeServices {
         "htmlUrl": "/comic/paiqiushaonian-guguanchunyi",
       },
       {
-        "title": "传武",
+        "title": "我的神器能升级",
         "imgUrl":
-            "https://cdn.jsdelivr.net/gh/kochokochokaeru/kochokochokaeru-h@latest/asset/thumbnail/jl8TZR2h.jpg",
-        "htmlUrl": "/comic/chuanwu-gkgongfang",
+            "https://manhua.acimg.cn/operation/0/23_17_10_188a6d347631a3fe5d8d808a785a9750_1648026613507.jpg/0",
+        "htmlUrl": "/comic/wodeshenqinengshengji-xiaofeng",
       },
     ];
 
@@ -40,20 +40,20 @@ class HomeServices {
       for (var comicCard in comicsCardElement) {
         itemList.add({
           "title": comicCard.querySelector(".comics-card__title")?.text.trim(),
-          "html": comicCard.querySelector("a")?.attributes["href"],
-          "cover": comicCard.querySelector("amp-img")?.attributes["src"],
+          "htmlUrl": comicCard.querySelector("a")?.attributes["href"],
+          "imgUrl": comicCard.querySelector("amp-img")?.attributes["src"],
           "tag": comicCard.querySelector(".tags")?.text.trim(),
           "cls": comicCard.querySelector(".cls")?.text.trim(),
         });
       }
       contentList.add({
-        "title": title,
-        "itemList": itemList,
+        "label": title,
+        "comics": itemList,
       });
     }
 
-    var homeData = {"swiper": swiper, "content": contentList};
+    var homeData = {"swiper": swiper, "catalog": contentList};
 
-    LogUtil.v(homeData);
+    return HomeEntity.fromJson(homeData);
   }
 }

@@ -58,6 +58,7 @@ dev_dependencies:
   curved_navigation_bar: ^1.0.3
   dio_smart_retry: ^1.2.0
   html: 0.15.0
+  extended_image: ^6.3.4
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
