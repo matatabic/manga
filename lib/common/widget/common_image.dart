@@ -21,7 +21,7 @@ class CommonImage extends StatelessWidget {
       loadStateChanged: (ExtendedImageState state) {
         switch (state.extendedImageLoadState) {
           case LoadState.loading:
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           case LoadState.completed:

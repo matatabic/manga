@@ -38,6 +38,13 @@ class _DetailScreenState extends State<DetailScreen> {
         future:
             _futureBuilderFuture, // 用户定义的需要异步执行的代码，类型为Future<String>或者null的变量或函数
       ),
+      endDrawer: Drawer(
+        child: Container(
+          height: 100,
+          color: Colors.white,
+          child: const Text('data'),
+        ),
+      ),
     );
   }
 
@@ -116,26 +123,35 @@ class _DetailScreenState extends State<DetailScreen> {
                     ],
                   ),
                 ),
-                InkWell(
-                  child: ExpandableText(
-                    detailEntity.info.desc,
-                    animation: true,
-                    prefixText: detailEntity.info.title,
-                    prefixStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26,
-                        color: Theme.of(context).primaryColor),
-                    expandText: '顯示完整資訊',
-                    collapseText: '只顯示部分資訊',
-                    maxLines: 3,
-                    linkColor: Colors.cyan,
+                ExpandableText(
+                  detailEntity.info.desc,
+                  animation: true,
+                  prefixText: detailEntity.info.title,
+                  prefixStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 26,
+                      color: Theme.of(context).primaryColor),
+                  expandText: '顯示完整資訊',
+                  collapseText: '只顯示部分資訊',
+                  maxLines: 3,
+                  linkColor: Colors.cyan,
+                ),
+                Center(
+                    child: InkWell(
+                  onTap: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    width: 170,
+                    height: 50,
+                    color: Colors.grey,
+                    child: const Center(
+                        child: Text("查看全部章節",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold))),
                   ),
-                ),
-                Container(
-                  width: 30,
-                  height: 100,
-                  color: Colors.red,
-                ),
+                )),
                 Flex(direction: Axis.horizontal, children: [
                   Expanded(
                     child: TextButton(
