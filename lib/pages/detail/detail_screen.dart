@@ -1,5 +1,7 @@
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manga/common/widget/common_image.dart';
 import 'package:manga/entity/detail_entity.dart';
 import 'package:manga/services/detail_services.dart';
 
@@ -76,26 +78,111 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget _createWidget(BuildContext context, AsyncSnapshot snapshot) {
     print("_createWidget");
     DetailEntity detailEntity = snapshot.data;
-    print(detailEntity.info);
 
     return SafeArea(
-      child: SizedBox(
-        height: 200,
-        child: Row(
-          children: [
-            // CommonImage(imgUrl: detailEntity.info.),
-            Column(
-              children: [
-                // Text(detailEntity.info.title),
-                // Text(detailEntity.info.author),
-                // Text(detailEntity.info.tagList.toString()),
-                // Text(detailEntity.info.supporting),
-                // Text(detailEntity.info.desc),
+        child: CustomScrollView(
+      shrinkWrap: true,
+      slivers: <Widget>[
+        SliverPadding(
+          padding: const EdgeInsets.all(20.0),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate(
+              <Widget>[
+                SizedBox(
+                  height: 210,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                          width: 145,
+                          height: 210,
+                          child: CommonImage(imgUrl: detailEntity.info.imgUrl)),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(detailEntity.info.title,
+                                style: const TextStyle(fontSize: 20)),
+                            Text(detailEntity.info.author,
+                                style: const TextStyle(fontSize: 17)),
+                            Text(detailEntity.info.tagList.toString(),
+                                style: const TextStyle(fontSize: 17)),
+                            Text(detailEntity.info.supporting,
+                                style: const TextStyle(color: Colors.red)),
+                            // Text(detailEntity.info.desc),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                InkWell(
+                  child: ExpandableText(
+                    detailEntity.info.desc,
+                    animation: true,
+                    prefixText: detailEntity.info.title,
+                    prefixStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                        color: Theme.of(context).primaryColor),
+                    expandText: '顯示完整資訊',
+                    collapseText: '只顯示部分資訊',
+                    maxLines: 3,
+                    linkColor: Colors.cyan,
+                  ),
+                ),
+                Container(
+                  width: 30,
+                  height: 100,
+                  color: Colors.red,
+                ),
+                Flex(direction: Axis.horizontal, children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text('加入書架'),
+                    ),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text('開始閱讀'),
+                    ),
+                  ),
+                ]),
+                Wrap(spacing: 10, runSpacing: 10, children: [
+                  ..._buildTagWidget(detailEntity.newChapter, () {})
+                ]),
               ],
-            )
-          ],
+            ),
+          ),
+        ),
+      ],
+    ));
+  }
+}
+
+List<Widget> _buildTagWidget(List<DetailNewChapter> tagList, onTap) {
+  List<Widget> tagWidgetList = [];
+  for (var item in tagList) {
+    tagWidgetList.add(InkWell(
+      onTap: () => onTap(item.title),
+      child: Container(
+        height: 60,
+        width: 150,
+        padding: const EdgeInsets.all(3.5),
+        decoration: BoxDecoration(
+            border: Border.all(
+          color: Colors.grey, //边框颜色
+          width: 1, //边框粗细
+        )),
+        child: Text(
+          item.title,
+          style: const TextStyle(fontSize: 17),
         ),
       ),
-    );
+    ));
   }
+
+  return tagWidgetList;
 }

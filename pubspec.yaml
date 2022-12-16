@@ -59,6 +59,7 @@ dev_dependencies:
   dio_smart_retry: ^1.2.0
   html: 0.15.0
   extended_image: ^6.3.4
+  expandable_text: ^2.3.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
