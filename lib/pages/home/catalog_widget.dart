@@ -20,17 +20,17 @@ class CatalogWidget extends StatelessWidget {
           height: 35,
           alignment: Alignment.topCenter,
           margin: const EdgeInsets.only(left: 2.5),
+          width: double.infinity,
           child: Row(children: <Widget>[
             Text(
               homeCatalog.label,
-              style: TextStyle(fontSize: 19),
+              style: const TextStyle(fontSize: 19),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               size: 18,
             )
-          ]),
-          width: double.infinity),
+          ])),
       SizedBox(
           height: 200,
           child: ListView.builder(

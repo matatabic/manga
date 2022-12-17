@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart' show debugPrint;
 import 'package:manga/entity/detail_entity.dart';
 import 'package:manga/entity/home_entity.dart';
+import 'package:manga/entity/watch_entity.dart';
 
 JsonConvert jsonConvert = JsonConvert();
 typedef JsonConvertFunction<T> = T Function(Map<String, dynamic> json);
@@ -20,6 +21,7 @@ class JsonConvert {
     (HomeSwiper).toString(): HomeSwiper.fromJson,
     (HomeCatalog).toString(): HomeCatalog.fromJson,
     (HomeCatalogComics).toString(): HomeCatalogComics.fromJson,
+    (WatchEntity).toString(): WatchEntity.fromJson,
   };
 
   T? convert<T>(dynamic value) {
@@ -140,6 +142,11 @@ class JsonConvert {
       return data
           .map<HomeCatalogComics>(
               (Map<String, dynamic> e) => HomeCatalogComics.fromJson(e))
+          .toList() as M;
+    }
+    if (<WatchEntity>[] is M) {
+      return data
+          .map<WatchEntity>((Map<String, dynamic> e) => WatchEntity.fromJson(e))
           .toList() as M;
     }
 
