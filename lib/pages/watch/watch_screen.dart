@@ -82,6 +82,7 @@ class _WatchScreenState extends State<WatchScreen> {
   Widget _createWidget(BuildContext context, AsyncSnapshot snapshot) {
     print("_createWidget");
     WatchEntity watchEntity = snapshot.data;
+    print(watchEntity.chapter[0]);
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,

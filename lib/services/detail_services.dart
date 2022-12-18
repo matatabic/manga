@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:manga/entity/detail_entity.dart';
 import 'package:manga/request/dio_manage.dart';
-
-import '../utils/logUtil.dart';
 
 class DetailServices {
   static Future getData(String htmlUrl) async {

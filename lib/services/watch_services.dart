@@ -7,6 +7,7 @@ import 'package:manga/utils/logUtil.dart';
 
 class WatchServices {
   static Future getData(htmlUrl) async {
+    print("htmlUrl:$htmlUrl");
     Response? response = await DioManage.get(
         "https://www.webmota.com/comic/chapter/wuliandianfeng-pikapi_7ajf1a/0_2871.html");
 

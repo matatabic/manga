@@ -5,7 +5,7 @@ import 'package:manga/request/dio_manage.dart';
 
 class HomeServices {
   static Future getData() async {
-    Response? response = await DioManage.get("https://tw.webmota.com");
+    Response? response = await DioManage.get("https://tw.baozimh.com");
     var document = parse(response?.data);
 
     List swiper = [

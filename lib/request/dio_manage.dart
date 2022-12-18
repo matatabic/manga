@@ -4,14 +4,17 @@ import 'package:dio_smart_retry/dio_smart_retry.dart';
 class DioManage {
   static Future<Response<dynamic>?> get(htmlUrl) async {
     final dio = Dio();
+    dio.options.connectTimeout = 1500; //5s
+    dio.options.receiveTimeout = 1500;
 
     dio.interceptors.add(RetryInterceptor(
       dio: dio,
       logPrint: print, // specify log function (optional)
-      retries: 2, // retry count (optional)
+      retries: 3, // retry count (optional)
       retryDelays: const [
         Duration(milliseconds: 500), // wait 1 sec before first retry
         Duration(milliseconds: 500), // wait 2 sec before second retry
+        Duration(milliseconds: 500), // wait 3 sec before third retry
       ],
     ));
 
