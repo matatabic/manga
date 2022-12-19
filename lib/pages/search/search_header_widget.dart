@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manga/pages/search/search_engine_widget.dart';
+import 'package:manga/pages/search/search_menu_widget.dart';
 
 class SearchHeaderWidget extends StatefulWidget {
   final double topHeight;
@@ -56,17 +57,17 @@ class _SearchHeaderWidgetState extends State<SearchHeaderWidget> {
                 onChangeQuery: (dynamic data) => _onChangeQuery(data),
                 loadData: (dynamic data) => widget.loadData(data),
                 query: _tempQuery),
-            // SearchMenuWidget(
-            //     loadData: (dynamic data) => widget.loadData(data),
-            //     genreIndex: widget.genreIndex,
-            //     sortIndex: widget.sortIndex,
-            //     durationIndex: widget.durationIndex,
-            //     broad: widget.broad,
-            //     year: widget.year,
-            //     month: widget.month,
-            //     customTagList: widget.customTagList,
-            //     tagList: widget.tagList,
-            //     brandList: widget.brandList)
+            SearchMenuWidget(
+                loadData: (dynamic data) => widget.loadData(data),
+                genreIndex: widget.genreIndex,
+                sortIndex: widget.sortIndex,
+                durationIndex: widget.durationIndex,
+                broad: widget.broad,
+                year: widget.year,
+                month: widget.month,
+                customTagList: widget.customTagList,
+                tagList: widget.tagList,
+                brandList: widget.brandList)
           ],
         ),
       ),

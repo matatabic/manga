@@ -73,17 +73,17 @@ class _SearchScreenState extends State<SearchScreen>
                 builder: (BuildContext context, LoadStatus? mode) {
                   Widget body;
                   if (mode == LoadStatus.loading) {
-                    body = CupertinoActivityIndicator();
+                    body = const CupertinoActivityIndicator();
                   } else if (mode == LoadStatus.failed) {
-                    body = Text("加载失败！点击重试！");
+                    body = const Text("加载失败！点击重试！");
                   } else if (mode == LoadStatus.canLoading) {
-                    body = Text("松手,加载更多!");
+                    body = const Text("松手,加载更多!");
                   } else if (mode == LoadStatus.noMore) {
-                    body = Text("没有更多数据了!");
+                    body = const Text("没有更多数据了!");
                   } else {
-                    body = Text("没有更多数据了!");
+                    body = const Text("没有更多数据了!");
                   }
-                  return Container(
+                  return SizedBox(
                     height: 55.0,
                     child: Center(child: body),
                   );

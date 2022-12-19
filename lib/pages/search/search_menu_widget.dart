@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manga/pages/search/menu/region_menu.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'menu/brand_menu.dart';
 import 'menu/duration_menu.dart';
-import 'menu/genre_menu.dart';
 import 'menu/sort_menu.dart';
+import 'menu/state_menu.dart';
 
 List _menuList = [
   {"id": 0, "icon": Icons.dashboard},
   {"id": 1, "icon": Icons.loyalty},
   {"id": 2, "icon": Icons.sort},
   {"id": 3, "icon": Icons.business},
-  {"id": 4, "icon": Icons.date_range},
-  {"id": 5, "icon": Icons.update}
+  // {"id": 4, "icon": Icons.date_range},
+  // {"id": 5, "icon": Icons.update}
 ];
 
 class SearchMenuWidget extends StatelessWidget {
@@ -120,12 +121,15 @@ Color getActive(that, index) {
 Widget getMenuDetail(that, index, loadData) {
   switch (index) {
     case 0:
-      return GenreMenu(
+      return RegionMenu(
         loadData: loadData,
-        genreIndex: that.genreIndex,
+        regionIndex: that.genreIndex,
       );
     case 1:
-
+      return StateMenu(
+        loadData: loadData,
+        stateIndex: that.genreIndex,
+      );
     case 2:
       return SortMenu(
         loadData: loadData,
