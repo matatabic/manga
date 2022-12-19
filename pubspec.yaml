@@ -60,6 +60,7 @@ dev_dependencies:
   html: 0.15.0
   extended_image: ^6.3.4
   expandable_text: ^2.3.0
+  modal_bottom_sheet: ^2.1.2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

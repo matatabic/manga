@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart' show debugPrint;
 import 'package:manga/entity/detail_entity.dart';
 import 'package:manga/entity/home_entity.dart';
+import 'package:manga/entity/search_entity.dart';
 import 'package:manga/entity/watch_entity.dart';
 
 JsonConvert jsonConvert = JsonConvert();
@@ -21,6 +22,15 @@ class JsonConvert {
     (HomeSwiper).toString(): HomeSwiper.fromJson,
     (HomeCatalog).toString(): HomeCatalog.fromJson,
     (HomeCatalogComics).toString(): HomeCatalogComics.fromJson,
+    (SearchEntity).toString(): SearchEntity.fromJson,
+    (SearchRegion).toString(): SearchRegion.fromJson,
+    (SearchRegionData).toString(): SearchRegionData.fromJson,
+    (SearchState).toString(): SearchState.fromJson,
+    (SearchStateData).toString(): SearchStateData.fromJson,
+    (SearchType).toString(): SearchType.fromJson,
+    (SearchTypeData).toString(): SearchTypeData.fromJson,
+    (SearchFilter).toString(): SearchFilter.fromJson,
+    (SearchComics).toString(): SearchComics.fromJson,
     (WatchEntity).toString(): WatchEntity.fromJson,
   };
 
@@ -142,6 +152,58 @@ class JsonConvert {
       return data
           .map<HomeCatalogComics>(
               (Map<String, dynamic> e) => HomeCatalogComics.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchEntity>[] is M) {
+      return data
+          .map<SearchEntity>(
+              (Map<String, dynamic> e) => SearchEntity.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchRegion>[] is M) {
+      return data
+          .map<SearchRegion>(
+              (Map<String, dynamic> e) => SearchRegion.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchRegionData>[] is M) {
+      return data
+          .map<SearchRegionData>(
+              (Map<String, dynamic> e) => SearchRegionData.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchState>[] is M) {
+      return data
+          .map<SearchState>((Map<String, dynamic> e) => SearchState.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchStateData>[] is M) {
+      return data
+          .map<SearchStateData>(
+              (Map<String, dynamic> e) => SearchStateData.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchType>[] is M) {
+      return data
+          .map<SearchType>((Map<String, dynamic> e) => SearchType.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchTypeData>[] is M) {
+      return data
+          .map<SearchTypeData>(
+              (Map<String, dynamic> e) => SearchTypeData.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchFilter>[] is M) {
+      return data
+          .map<SearchFilter>(
+              (Map<String, dynamic> e) => SearchFilter.fromJson(e))
+          .toList() as M;
+    }
+    if (<SearchComics>[] is M) {
+      return data
+          .map<SearchComics>(
+              (Map<String, dynamic> e) => SearchComics.fromJson(e))
           .toList() as M;
     }
     if (<WatchEntity>[] is M) {

@@ -23,24 +23,24 @@ class _HeroSlidePageState extends State<HeroSlidePage> {
       color: Colors.transparent,
       child: ExtendedImageSlidePage(
         key: slidePageKey,
+        slideAxis: SlideAxis.both,
+        slideType: SlideType.onlyImage,
         child: GestureDetector(
           child: HeroWidget(
+            tag: widget.heroTag,
+            slideType: SlideType.onlyImage,
+            slidePagekey: slidePageKey,
             child: ExtendedImage.network(
               widget.url,
               mode: ExtendedImageMode.gesture,
               enableSlideOutPage: true,
             ),
-            tag: widget.heroTag,
-            slideType: SlideType.onlyImage,
-            slidePagekey: slidePageKey,
           ),
           onTap: () {
             slidePageKey.currentState!.popPage();
             Navigator.pop(context);
           },
         ),
-        slideAxis: SlideAxis.both,
-        slideType: SlideType.onlyImage,
       ),
     );
   }
