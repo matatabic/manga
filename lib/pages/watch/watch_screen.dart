@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manga/common/widget/common_image.dart';
-import 'package:manga/entity/detail_entity.dart';
-import 'package:manga/entity/watch_entity.dart';
 import 'package:manga/services/watch_services.dart';
+
+import '../../entity/watch_entity.dart';
 
 class WatchScreen extends StatefulWidget {
   final String htmlUrl;
@@ -29,9 +29,9 @@ class _WatchScreenState extends State<WatchScreen> {
   }
 
   Future loadData(htmlUrl) async {
-    DetailEntity detailEntity = await WatchServices.getData(htmlUrl);
+    WatchEntity watchEntity = await WatchServices.getData(htmlUrl);
 
-    return detailEntity;
+    return watchEntity.chapter;
   }
 
   @override
@@ -81,14 +81,14 @@ class _WatchScreenState extends State<WatchScreen> {
 
   Widget _createWidget(BuildContext context, AsyncSnapshot snapshot) {
     print("_createWidget");
-    WatchEntity watchEntity = snapshot.data;
-    print(watchEntity.chapter[0]);
+    List<String> chapterList = snapshot.data;
+
     return ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: watchEntity.chapter.length,
+        // shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: chapterList.length,
         itemBuilder: (BuildContext context, int index) {
-          return CommonImage(imgUrl: watchEntity.chapter[index]);
+          return CommonImage(imgUrl: chapterList[index]);
         });
   }
 }

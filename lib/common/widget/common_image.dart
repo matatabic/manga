@@ -14,9 +14,10 @@ class CommonImage extends StatelessWidget {
       image: ExtendedResizeImage(
         ExtendedNetworkImageProvider(imgUrl,
             // "http://img5.mtime.cn/mt/2022/01/19/102417.23221502_1280X720X2.jpg",
-            cache: true,
+            cache: false,
             retries: 3,
             timeRetry: const Duration(milliseconds: 700)),
+        compressionRatio: 1,
       ),
       loadStateChanged: (ExtendedImageState state) {
         switch (state.extendedImageLoadState) {

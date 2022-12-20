@@ -1,18 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manga/entity/search_entity.dart';
+import 'package:manga/services/search_services.dart';
 
-class BrandMenu extends StatelessWidget {
+class TypeMenu extends StatelessWidget {
   final Function(dynamic) loadData;
   final List<String> brandList;
 
-  const BrandMenu({Key? key, required this.loadData, required this.brandList})
+  const TypeMenu({Key? key, required this.loadData, required this.brandList})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print('BrandMenu build');
     List<Widget> tagWidgetList = [];
-
+    for (SearchTypeData item in searchType.data) {
+      tagWidgetList.add(BrandDetail(
+          brandList: brandList,
+          title: item.cnName,
+          active: brandList.contains(item.enName)));
+    }
     return WillPopScope(
       onWillPop: () async {
         loadData({});
@@ -30,7 +37,7 @@ class BrandMenu extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            title: const Text("123"),
+            title: Text(searchType.label),
           ),
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

@@ -4,7 +4,7 @@ import 'package:manga/generated/json/base/json_convert_content.dart';
 WatchEntity $WatchEntityFromJson(Map<String, dynamic> json) {
   final WatchEntity watchEntity = WatchEntity();
   final List<String>? chapter =
-      jsonConvert.convertListNotNull<String>(json['Chapter']);
+      jsonConvert.convertListNotNull<String>(json['chapter']);
   if (chapter != null) {
     watchEntity.chapter = chapter;
   }
@@ -21,7 +21,7 @@ WatchEntity $WatchEntityFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $WatchEntityToJson(WatchEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
-  data['Chapter'] = entity.chapter;
+  data['chapter'] = entity.chapter;
   data['lastChapter'] = entity.lastChapter;
   data['nextChapter'] = entity.nextChapter;
   return data;

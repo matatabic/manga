@@ -22,26 +22,20 @@ class _SearchScreenState extends State<SearchScreen>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
-  Interval opacityCurve = Interval(0.0, 1, curve: Curves.fastOutSlowIn);
+  Interval opacityCurve = const Interval(0.0, 1, curve: Curves.fastOutSlowIn);
 
   var _futureBuilderFuture;
   int _page = 1;
-  late int _totalPage;
-  // List<SearchVideo> _searchVideoList = [];
+  bool hasMore = true;
+  final List<SearchComics> _searchList = [];
 
   String _htmlUrl = "";
 
   String _query = "";
-  bool _broad = false;
-  int _genreIndex = 0;
-  int _sortIndex = 0;
-  int _durationIndex = 0;
-
-  dynamic _year;
-  dynamic _month;
-  List<String> _customTagList = [];
-  List<String> _tagList = [];
-  List<String> _brandList = [];
+  int _regionIndex = 0;
+  int _stateIndex = 0;
+  int _typeIndex = 0;
+  int _filterIndex = 0;
 
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -94,15 +88,10 @@ class _SearchScreenState extends State<SearchScreen>
                   SearchHeaderWidget(
                     loadData: (dynamic data) => _onLoading(data, false),
                     topHeight: _topHeight,
-                    genreIndex: _genreIndex,
-                    sortIndex: _sortIndex,
-                    durationIndex: _durationIndex,
-                    broad: _broad,
-                    year: _year,
-                    month: _month,
-                    customTagList: _customTagList,
-                    tagList: _tagList,
-                    brandList: _brandList,
+                    regionIndex: _regionIndex,
+                    stateIndex: _stateIndex,
+                    typeIndex: _typeIndex,
+                    filterIndex: _filterIndex,
                   ),
                   const SliverPadding(
                     padding: EdgeInsets.only(top: 10),
@@ -223,7 +212,6 @@ class _SearchScreenState extends State<SearchScreen>
   @override
   void initState() {
     super.initState();
-    initTagListAndCustomTagList();
     _futureBuilderFuture = loadData(_jointHtml());
   }
 
@@ -240,9 +228,6 @@ class _SearchScreenState extends State<SearchScreen>
     //     _customTagList.add(item);
     //   }
     // }
-
-    print("_tagList: $_tagList");
-    print("_customTagList: $_customTagList");
   }
 
   @override
@@ -258,7 +243,7 @@ class _SearchScreenState extends State<SearchScreen>
     print(_htmlUrl);
     print(newHtml);
     if (loadMore) {
-      if (_totalPage - _page > 0) {
+      if (hasMore) {
         //获取下一页数据
         print("获取下一页数据");
         _page = _page + 1;
@@ -291,52 +276,35 @@ class _SearchScreenState extends State<SearchScreen>
       case "query":
         _query = data['data'];
         break;
-      case "broad":
-        _broad = data['data'];
+      case "region":
+        _regionIndex = data['data'];
         break;
-      case "genre":
-        _genreIndex = data['data'];
+      case "state":
+        _stateIndex = data['data'];
         break;
-      case "sort":
-        _sortIndex = data['data'];
+      case "type":
+        _typeIndex = data['data'];
         break;
-      case "duration":
-        _durationIndex = data['data'];
-        break;
-      case "date":
-        _year = data['data']['year'];
-        _month = data['data']['month'];
-        break;
-      case "tag":
-        _tagList = data['data'];
-        break;
-      case "brand":
-        _brandList = data['data'];
+      case "filter":
+        _filterIndex = data['data'];
         break;
     }
   }
 
   String _jointHtml() {
     String newHtml = "https://tw.baozimh.com/classify";
-    // if (_query.length > 0) {
-    //   newHtml = "$newHtml$_query";
-    // }
-    //
-    // if (_broad) {
-    //   newHtml = "$newHtml&broad=on";
-    // }
-    //
-    // if (_genreIndex > 0) {
-    //   newHtml = "$newHtml&genre=${genre.data[_genreIndex]}";
-    // }
-    //
-    // if (_sortIndex > 0) {
-    //   newHtml = "$newHtml&sort=${sort.data[_sortIndex]}";
-    // }
-    //
-    // if (_durationIndex > 0) {
-    //   newHtml = "$newHtml&duration=${duration.data[_durationIndex]}";
-    // }
+    if (_regionIndex != 0) {
+      newHtml = "$newHtml&region=${searchRegion.data[_regionIndex].enName}";
+    }
+    if (_stateIndex != 0) {
+      newHtml = "$newHtml&state=${searchState.data[_stateIndex].enName}";
+    }
+    if (_typeIndex != 0) {
+      newHtml = "$newHtml&type=${searchType.data[_typeIndex].enName}";
+    }
+    if (_filterIndex != 0) {
+      newHtml = "$newHtml&filter=${searchFilter.data[_filterIndex]}";
+    }
 
     return newHtml;
   }
@@ -344,14 +312,20 @@ class _SearchScreenState extends State<SearchScreen>
   Future loadData(url) async {
     print("请求数据");
     SearchEntity searchEntity = await SearchServices.getData();
+    _htmlUrl = url;
+    if (searchEntity.comics.length == 36) {
+      hasMore = true;
+    } else {
+      hasMore = false;
+    }
+
     return searchEntity.comics;
     // SearchEntity searchEntity = data;
     // _htmlUrl = url;
     // _commendCount = searchEntity.commendCount;
     // _totalPage = searchEntity.page;
-    // _searchVideoList.addAll(searchEntity.video);
-    // print(_searchVideoList.length);
-    // print("async loadData");
+    _searchList.addAll(searchEntity.comics);
+
     // return _searchVideoList;
   }
 }

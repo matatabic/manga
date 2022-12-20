@@ -6,30 +6,20 @@ import 'package:manga/pages/search/search_menu_widget.dart';
 class SearchHeaderWidget extends StatefulWidget {
   final double topHeight;
   final Function(dynamic) loadData;
-  final bool broad;
-  final int genreIndex;
-  final int sortIndex;
-  final int durationIndex;
-  final year;
-  final month;
-  final List<String> customTagList;
-  final List<String> tagList;
-  final List<String> brandList;
+  final int regionIndex;
+  final int stateIndex;
+  final int typeIndex;
+  final int filterIndex;
 
-  const SearchHeaderWidget(
-      {Key? key,
-      required this.topHeight,
-      required this.broad,
-      required this.loadData,
-      required this.genreIndex,
-      required this.sortIndex,
-      required this.durationIndex,
-      required this.year,
-      required this.month,
-      required this.customTagList,
-      required this.tagList,
-      required this.brandList})
-      : super(key: key);
+  const SearchHeaderWidget({
+    Key? key,
+    required this.topHeight,
+    required this.loadData,
+    required this.regionIndex,
+    required this.stateIndex,
+    required this.typeIndex,
+    required this.filterIndex,
+  }) : super(key: key);
 
   @override
   _SearchHeaderWidgetState createState() => _SearchHeaderWidgetState();
@@ -59,15 +49,10 @@ class _SearchHeaderWidgetState extends State<SearchHeaderWidget> {
                 query: _tempQuery),
             SearchMenuWidget(
                 loadData: (dynamic data) => widget.loadData(data),
-                genreIndex: widget.genreIndex,
-                sortIndex: widget.sortIndex,
-                durationIndex: widget.durationIndex,
-                broad: widget.broad,
-                year: widget.year,
-                month: widget.month,
-                customTagList: widget.customTagList,
-                tagList: widget.tagList,
-                brandList: widget.brandList)
+                regionIndex: widget.regionIndex,
+                stateIndex: widget.stateIndex,
+                typeIndex: widget.typeIndex,
+                filterIndex: widget.filterIndex),
           ],
         ),
       ),

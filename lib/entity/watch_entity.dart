@@ -5,7 +5,6 @@ import 'package:manga/generated/json/watch_entity.g.dart';
 
 @JsonSerializable()
 class WatchEntity {
-  @JSONField(name: "Chapter")
   late List<String> chapter;
   late String lastChapter;
   late String nextChapter;

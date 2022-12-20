@@ -7,6 +7,7 @@ import 'package:manga/request/dio_manage.dart';
 SearchRegion searchRegion = SearchRegion.fromJson({
   "label": "地區",
   "data": [
+    {"enName": "all", "cnName": "全部"},
     {"enName": "cn", "cnName": "國漫"},
     {"enName": "jp", "cnName": "日本"},
     {"enName": "kr", "cnName": "韓國"},
@@ -26,6 +27,10 @@ SearchState searchState = SearchState.fromJson({
 SearchType searchType = SearchType.fromJson({
   "label": "類型",
   "data": [
+    {
+      "enName": "all",
+      "cnName": "全部",
+    },
     {
       "enName": "lianai",
       "cnName": "戀愛",
@@ -132,6 +137,7 @@ SearchType searchType = SearchType.fromJson({
 SearchFilter searchFilter = SearchFilter.fromJson({
   "label": "首字母",
   "data": [
+    "全部",
     "ABCD",
     "EFGH",
     "IJKL",
@@ -173,7 +179,6 @@ class SearchServices {
             .replaceAll("..", "、")
       });
     }
-
     var searchData = {
       // "region": searchRegion,
       // "state": searchState,

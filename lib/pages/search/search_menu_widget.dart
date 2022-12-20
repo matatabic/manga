@@ -1,47 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manga/pages/search/menu/filter_menu.dart';
 import 'package:manga/pages/search/menu/region_menu.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import 'menu/brand_menu.dart';
-import 'menu/duration_menu.dart';
-import 'menu/sort_menu.dart';
 import 'menu/state_menu.dart';
+import 'menu/type_menu.dart';
 
 List _menuList = [
-  {"id": 0, "icon": Icons.dashboard},
-  {"id": 1, "icon": Icons.loyalty},
-  {"id": 2, "icon": Icons.sort},
-  {"id": 3, "icon": Icons.business},
-  // {"id": 4, "icon": Icons.date_range},
-  // {"id": 5, "icon": Icons.update}
+  {"id": 0, "icon": Icons.app_registration},
+  {"id": 1, "icon": Icons.category},
+  {"id": 2, "icon": Icons.type_specimen},
+  {"id": 3, "icon": Icons.filter},
 ];
 
 class SearchMenuWidget extends StatelessWidget {
   final Function(dynamic) loadData;
-  final bool broad;
-  final int genreIndex;
-  final int sortIndex;
-  final int durationIndex;
-  final year;
-  final month;
-  final List<String> customTagList;
-  final List<String> tagList;
-  final List<String> brandList;
+  final int regionIndex;
+  final int stateIndex;
+  final int typeIndex;
+  final int filterIndex;
 
-  const SearchMenuWidget(
-      {Key? key,
-      required this.broad,
-      required this.loadData,
-      required this.genreIndex,
-      required this.sortIndex,
-      required this.durationIndex,
-      required this.year,
-      required this.month,
-      required this.customTagList,
-      required this.tagList,
-      required this.brandList})
-      : super(key: key);
+  const SearchMenuWidget({
+    Key? key,
+    required this.loadData,
+    required this.regionIndex,
+    required this.stateIndex,
+    required this.typeIndex,
+    required this.filterIndex,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,27 +78,19 @@ class SearchMenuWidget extends StatelessWidget {
 Color getActive(that, index) {
   switch (index) {
     case 0:
-      return that.genreIndex > 0
+      return that.regionIndex > 0
           ? Colors.orangeAccent
           : const Color.fromRGBO(51, 51, 51, 1);
     case 1:
-      return that.tagList.length > 0
+      return that.stateIndex > 0
           ? Colors.orangeAccent
           : const Color.fromRGBO(51, 51, 51, 1);
     case 2:
-      return that.sortIndex > 0
+      return that.typeIndex > 0
           ? Colors.orangeAccent
           : const Color.fromRGBO(51, 51, 51, 1);
     case 3:
-      return that.brandList.length > 0
-          ? Colors.orangeAccent
-          : const Color.fromRGBO(51, 51, 51, 1);
-    case 4:
-      return that.year != "全部" && that.year != null
-          ? Colors.orangeAccent
-          : const Color.fromRGBO(51, 51, 51, 1);
-    case 5:
-      return that.durationIndex > 0
+      return that.filterIndex > 0
           ? Colors.orangeAccent
           : const Color.fromRGBO(51, 51, 51, 1);
   }
@@ -131,21 +110,11 @@ Widget getMenuDetail(that, index, loadData) {
         stateIndex: that.genreIndex,
       );
     case 2:
-      return SortMenu(
-        loadData: loadData,
-        sortIndex: that.sortIndex,
-      );
+      return TypeMenu(loadData: loadData, brandList: []);
     case 3:
-      return BrandMenu(
+      return FilterMenu(
         loadData: loadData,
         brandList: that.brandList,
-      );
-    case 4:
-
-    case 5:
-      return DurationMenu(
-        loadData: loadData,
-        durationIndex: that.durationIndex,
       );
     default:
       return Container();
