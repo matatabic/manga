@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:manga/common/widget/common_image.dart';
+import 'package:manga/pages/watch/watch_item.dart';
 import 'package:manga/services/watch_services.dart';
 
 import '../../entity/watch_entity.dart';
@@ -81,14 +81,18 @@ class _WatchScreenState extends State<WatchScreen> {
 
   Widget _createWidget(BuildContext context, AsyncSnapshot snapshot) {
     print("_createWidget");
-    List<String> chapterList = snapshot.data;
+    List<WatchChapter> chapterList = snapshot.data;
 
     return ListView.builder(
         // shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: chapterList.length,
         itemBuilder: (BuildContext context, int index) {
-          return CommonImage(imgUrl: chapterList[index]);
+          return WatchItem(
+            imgUrl: chapterList[index].imgUrl,
+            imgWidth: double.parse(chapterList[index].imgWidth),
+            imgHeight: double.parse(chapterList[index].imgHeight),
+          );
         });
   }
 }

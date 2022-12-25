@@ -4,6 +4,7 @@ import 'package:manga/providers/home_model.dart';
 import 'package:provider/provider.dart';
 
 import 'bottom_nav_bar.dart';
+import 'common/adaptation.dart';
 
 void main() => runApp(
       MultiProvider(
@@ -30,6 +31,6 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.orange[300],
           scaffoldBackgroundColor: Colors.black26,
         ),
-        home: BottomNavBar());
+        home: Adaptation(child: BottomNavBar()));
   }
 }

@@ -22,7 +22,11 @@ class WatchServices {
 
     List comicList = [];
     for (var comic in comicElement!) {
-      comicList.add(comic.attributes["src"]);
+      comicList.add({
+        "imgUrl": comic.attributes["src"],
+        "imgWidth": comic.attributes["width"],
+        "imgHeight": comic.attributes["height"],
+      });
     }
 
     var watchData = {
@@ -30,8 +34,7 @@ class WatchServices {
       "lastChapter": lastChapter,
       "nextChapter": nextChapter,
     };
-    // LogUtil.d(json.encode(watchData));
-    print("watchData:$watchData");
+
     return WatchEntity.fromJson(watchData);
   }
 }

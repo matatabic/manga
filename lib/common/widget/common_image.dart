@@ -36,7 +36,7 @@ class CommonImage extends StatelessWidget {
                     "assets/images/error.png",
                     fit: BoxFit.fill,
                   ),
-                  Positioned(
+                  const Positioned(
                     bottom: 0.0,
                     left: 0.0,
                     right: 0.0,
