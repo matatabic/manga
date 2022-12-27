@@ -83,6 +83,19 @@ class _WatchScreenState extends State<WatchScreen> {
     print("_createWidget");
     List<WatchChapter> chapterList = snapshot.data;
 
+    List<Widget> dataList = [];
+    for (var i = 0; i < chapterList.length; i++) {
+      dataList.add(WatchItem(
+        imgUrl: chapterList[i].imgUrl,
+        imgWidth: double.parse(chapterList[i].imgWidth),
+        imgHeight: double.parse(chapterList[i].imgHeight),
+      ));
+    }
+
+    return ListView(
+      children: dataList,
+    );
+
     return ListView.builder(
         // shrinkWrap: true,
         scrollDirection: Axis.vertical,

@@ -25,7 +25,7 @@ class _WatchItemState extends State<WatchItem> {
       fit: BoxFit.cover,
       image: ExtendedResizeImage(
         ExtendedNetworkImageProvider(widget.imgUrl,
-            cache: false,
+            cache: true,
             retries: 3,
             timeRetry: const Duration(milliseconds: 700)),
         compressionRatio: 1,
